@@ -16,33 +16,42 @@ export default function Tasks () {
     getData()
   } , [])
 
+
+  function Complete(event) {
+    const key = event.target.getAttribute('data-key')
+  }
+
   return <div className="overflow-x-auto">
   <table className="table table-zebra">
-    {/* head */}
+
     <thead>
-      <tr>  
+      <tr className="text-center">  
         <th>ID</th>
         <th>Task</th>
         <th>Date Created</th>
-        <th className="text-center">Actions</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
+   
       {
         result.map((item , index) => {
-          return <tr key={index}>
-            {
-              item.map((sub , index) => {
-                return <td key={index}>
-                  {
-                    sub
-                  }
-                </td>
-              })
-            }
+          return <tr className="text-center" key={index}>
+
+            <td >{item['_id']}</td>
+            <td>{item['_task']}</td>
+            <td>{item['_date']}</td>
+
             <td>
-              <button className="btn btn-xs btn-outline btn-secondary">Complete</button>
+              <button 
+              className="btn btn-xs btn-outline btn-secondary
+              "
+              data-key={item['_id']}
+
+              onClick={Complete}
+              >
+                Complete
+            </button>
             </td>
           </tr>
         })
