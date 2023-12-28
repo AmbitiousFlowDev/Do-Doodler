@@ -1,11 +1,11 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-const api = 'http://localhost:5000/tasks'
+
 
 
 export default function Tasks () {
-
+  const api = 'http://localhost:5000/tasks'
   const [result , setResult] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,11 @@ export default function Tasks () {
 
 
   function Complete(event) {
-    const key = event.target.getAttribute('data-key')
+    const api = 'http://localhost:5000/complete_task'
+    const data = {
+      key : event.target.getAttribute('data-key')
+    }
+    axios.post(api , data).then(e => {window.location.reload(false)})
   }
 
   return <div className="overflow-x-auto">
@@ -38,7 +42,7 @@ export default function Tasks () {
         result.map((item , index) => {
           return <tr className="text-center" key={index}>
 
-            <td >{item['_id']}</td>
+            <td>{item['_id']}</td>
             <td>{item['_task']}</td>
             <td>{item['_date']}</td>
 
